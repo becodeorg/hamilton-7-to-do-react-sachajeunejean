@@ -1,11 +1,10 @@
-// react imports
+// React imports
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-// app imports
-// import './index.css';
+// App imports
+// import './styles/app.scss';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
