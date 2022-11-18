@@ -2,7 +2,7 @@ import React from "react";
 
 const Todo = ({ index, todo, todos, setTodos }) => {
   const handleDelete = () => {
-    setTodos(todos.filter((t) => t != todo));
+    setTodos(todos.filter((t) => t !== todo));
 
     const keys = Object.keys(localStorage);
     for (let key of keys) {
