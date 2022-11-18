@@ -33,7 +33,7 @@ const Todo = ({ todo, todos, setTodos, categoryState }) => {
       <span
         id="todo-check"
         className={`${
-          categoryState === "done" || category == "done" ? "hide" : ""
+          categoryState === "done" || category === "done" ? "hide" : ""
         } material-symbols-outlined`}
         onClick={handleTodoDone}
       >
