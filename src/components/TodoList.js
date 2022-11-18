@@ -11,7 +11,7 @@ const TodoList = () => {
   }, []);
 
   useEffect(() => {
-    setCategoryState("all");
+    setCategoryState("progress");
   }, []);
 
   const handleCategories = (e) => {
@@ -52,16 +52,15 @@ const TodoList = () => {
       </form>
       <article className="todo-app__list-container">
         <select className="categories" onChange={handleCategories}>
-          <option value="all">Todos (All)</option>
           <option value="progress">Todos (In Progress)</option>
-          <option value="done">Todos (Dones)</option>
+          <option value="done">Todos (Done)</option>
+          <option value="all">Todos (All)</option>
         </select>
         <ul className="todo-app__list-container__list">
           {todos.map((todo, key) => (
             <Todo
               localStorage={localStorage}
               key={key}
-              index={key}
               todo={todo}
               todos={todos}
               setTodos={setTodos}

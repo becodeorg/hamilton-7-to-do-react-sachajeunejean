@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Todo = ({ index, todo, todos, setTodos, categoryState }) => {
+const Todo = ({ todo, todos, setTodos, categoryState }) => {
   let [category, setCategory] = useState([]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Todo = ({ index, todo, todos, setTodos, categoryState }) => {
       <span
         id="todo-check"
         className={`${
-          categoryState === "done" ? "hide" : ""
+          categoryState === "done" || category == "done" ? "hide" : ""
         } material-symbols-outlined`}
         onClick={handleTodoDone}
       >
