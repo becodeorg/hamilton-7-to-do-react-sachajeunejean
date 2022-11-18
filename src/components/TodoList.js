@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Todo from "./Todo";
 
 const TodoList = () => {
-  let [todos, setTodos] = useState([[]]);
+  let [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const values = Object.values(localStorage);
+    setTodos([...values]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.target[0].value) {
+      const randomnumber = Math.floor(Math.random() * 100000000 + 1);
+
+      localStorage.setItem(String(randomnumber), e.target[0].value);
       setTodos([...todos, e.target[0].value]);
     }
   };
@@ -31,8 +39,8 @@ const TodoList = () => {
       <article className="todo-app__list-container">
         <h2>Todos</h2>
         <ul className="todo-app__list-container__list">
-          {todos.map((todo, index) => (
-            <Todo key={index} content={todo} />
+          {todos.map((content, index) => (
+            <Todo key={index} content={content} />
           ))}
         </ul>
       </article>
