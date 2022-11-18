@@ -1,0 +1,79 @@
+.todo-app {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  margin-top: 50px;
+  width: 100%;
+  font-family: "Sono", sans-serif;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 50px;
+    width: auto;
+    max-width: auto;
+
+    &__input {
+      display: flex;
+      align-items: center;
+      outline: none;
+      width: 200px;
+      height: 40px;
+      font-family: "Sono", sans-serif;
+      font-size: 16px;
+      padding: 10px;
+      border: 1px solid rgb(179, 179, 179);
+
+      &::placeholder {
+        font-size: 11px;
+      }
+    }
+
+    &__button {
+      width: 100px;
+      color: white;
+      font-family: "Sono", sans-serif;
+      background-color: rgb(0, 145, 255);
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(3, 106, 185);
+      }
+    }
+  }
+
+  &__list-container {
+    display: flex;
+    flex-direction: column;
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+
+      &__todo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 20px;
+        font-size: 16px;
+
+        #todo-check {
+          cursor: pointer;
+          color: green;
+          margin-left: 15px;
+        }
+
+        #todo-delete {
+          cursor: pointer;
+          color: red;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}

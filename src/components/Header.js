@@ -1,11 +1,7 @@
-const Title = () => {
-  return <h1>My Todo App</h1>;
-};
-
 const Header = () => {
   return (
     <header>
-      <Title />
+      <h1>My Todo App</h1>
     </header>
   );
 };

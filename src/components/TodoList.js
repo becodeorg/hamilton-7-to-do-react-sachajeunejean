@@ -16,17 +16,21 @@ const TodoList = () => {
 
       localStorage.setItem(String(randomnumber), e.target[0].value);
       setTodos([...todos, e.target[0].value]);
+
+      e.target[0].value = "";
     }
   };
 
   return (
     <main className="todo-app">
+      <h2>Add Items to the TodoList</h2>
       <form className="todo-app__form" onSubmit={handleSubmit}>
         <input
           className="todo-app__form__input"
           type="text"
           name="new-todo"
           id="new-todo"
+          placeholder="example: Learn React"
         />
         <button
           className="todo-app__form__button"
