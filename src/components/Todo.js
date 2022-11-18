@@ -7,7 +7,7 @@ const Todo = ({ index, todo, todos, setTodos }) => {
     const keys = Object.keys(localStorage);
     for (let key of keys) {
       const item = localStorage.getItem(key);
-      if (item == todo) {
+      if (item === todo) {
         console.log(item);
         localStorage.removeItem(key);
       }
