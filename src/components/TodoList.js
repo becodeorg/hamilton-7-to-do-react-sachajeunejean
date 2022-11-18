@@ -41,10 +41,17 @@ const TodoList = () => {
         </button>
       </form>
       <article className="todo-app__list-container">
-        <h2>Todos</h2>
+        <h2>All Todos</h2>
         <ul className="todo-app__list-container__list">
-          {todos.map((content, index) => (
-            <Todo key={index} content={content} />
+          {todos.map((todo, key) => (
+            <Todo
+              localStorage={localStorage}
+              key={key}
+              index={key}
+              todo={todo}
+              todos={todos}
+              setTodos={setTodos}
+            />
           ))}
         </ul>
       </article>
