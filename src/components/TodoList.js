@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Todo from "./Todo";
 
 const TodoList = () => {
   let [todos, setTodos] = useState([]);
+  let [categoryState, setCategoryState] = useState([]);
 
   useEffect(() => {
     const values = Object.values(localStorage);
     setTodos([...values]);
   }, []);
+
+  useEffect(() => {
+    setCategoryState("all");
+  }, []);
+
+  const handleCategories = (e) => {
+    setCategoryState(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +24,8 @@ const TodoList = () => {
       const randomnumber = Math.floor(Math.random() * 100000000 + 1);
 
       localStorage.setItem(String(randomnumber), e.target[0].value);
-      setTodos([...todos, e.target[0].value]);
+      if (!todos.includes(e.target[0].value))
+        setTodos([...todos, e.target[0].value]);
 
       e.target[0].value = "";
     }
@@ -41,7 +51,11 @@ const TodoList = () => {
         </button>
       </form>
       <article className="todo-app__list-container">
-        <h2>All Todos</h2>
+        <select className="categories" onChange={handleCategories}>
+          <option value="all">Todos (All)</option>
+          <option value="progress">Todos (In Progress)</option>
+          <option value="done">Todos (Dones)</option>
+        </select>
         <ul className="todo-app__list-container__list">
           {todos.map((todo, key) => (
             <Todo
@@ -51,6 +65,7 @@ const TodoList = () => {
               todo={todo}
               todos={todos}
               setTodos={setTodos}
+              categoryState={categoryState}
             />
           ))}
         </ul>

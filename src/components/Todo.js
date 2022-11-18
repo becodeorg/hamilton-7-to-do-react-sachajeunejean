@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Todo = ({ index, todo, todos, setTodos }) => {
+const Todo = ({ index, todo, todos, setTodos, categoryState }) => {
+  let [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    setCategory("progress");
+  }, []);
+
   const handleDelete = () => {
     setTodos(todos.filter((t) => t !== todo));
 
@@ -8,16 +14,29 @@ const Todo = ({ index, todo, todos, setTodos }) => {
     for (let key of keys) {
       const item = localStorage.getItem(key);
       if (item === todo) {
-        console.log(item);
         localStorage.removeItem(key);
       }
     }
   };
 
+  const handleTodoDone = (e) => {
+    setCategory("done");
+  };
+
   return (
-    <li className="todo-app__list-container__list__todo">
+    <li
+      className={`${
+        categoryState !== "all" && categoryState !== category ? "hide" : ""
+      } todo-app__list-container__list__todo`}
+    >
       <p>{todo}</p>
-      <span id="todo-check" className="material-symbols-outlined">
+      <span
+        id="todo-check"
+        className={`${
+          categoryState === "done" ? "hide" : ""
+        } material-symbols-outlined`}
+        onClick={handleTodoDone}
+      >
         check
       </span>
       <span
