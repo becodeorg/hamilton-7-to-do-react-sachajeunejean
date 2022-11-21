@@ -1,40 +1,59 @@
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Todo from "./Todo";
 
 const TodoList = () => {
-  let [todos, setTodos] = useState([]);
-  let [categoryState, setCategoryState] = useState([]);
+  const [todos, setTodos] = useState([]);
+  const [categorySelected, setCategorySelected] = useState("progress");
 
   useEffect(() => {
-    const values = Object.values(localStorage);
-    setTodos([...values]);
+    const localStorageKeys = Object.keys(localStorage);
+    const localStorageItems = [];
+
+    for (let key of localStorageKeys) {
+      localStorageItems.push(JSON.parse(localStorage.getItem(key)));
+    }
+
+    setTodos(localStorageItems);
   }, []);
 
-  useEffect(() => {
-    setCategoryState("progress");
-  }, []);
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
 
-  const handleCategories = (e) => {
-    setCategoryState(e.target.value);
+    if (e.target[0].value) {
+      let index = -1;
+      do {
+        index = Math.floor(Math.random() * 10) + 1;
+      } while (localStorage.getItem(index));
+
+      const todo = {
+        content: e.target[0].value,
+        category: "progress",
+        index: index,
+      };
+
+      console.log(todo);
+      setTodos([...todos, todo]);
+
+      if (!localStorage.getItem(index)) {
+        const item = {
+          content: todo.content,
+          category: todo.category,
+          index: index,
+        };
+        localStorage.setItem(index, JSON.stringify(item));
+      }
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (e.target[0].value) {
-      const randomnumber = Math.floor(Math.random() * 100000000 + 1);
-
-      localStorage.setItem(String(randomnumber), e.target[0].value);
-      if (!todos.includes(e.target[0].value))
-        setTodos([...todos, e.target[0].value]);
-
-      e.target[0].value = "";
-    }
+  const categoryHandler = (e) => {
+    console.log("pass");
+    setCategorySelected(e.target.value);
   };
 
   return (
     <main className="todo-app">
-      <h2>Add Items to the TodoList</h2>
-      <form className="todo-app__form" onSubmit={handleSubmit}>
+      <h2>Add items to the list</h2>
+      <form className="todo-app__form" onSubmit={formSubmitHandler}>
         <input
           className="todo-app__form__input"
           type="text"
@@ -51,25 +70,19 @@ const TodoList = () => {
         </button>
       </form>
       <article className="todo-app__list-container">
-        <select className="categories" onChange={handleCategories}>
+        <select className="categories" onChange={categoryHandler}>
           <option value="progress">Todos (In Progress)</option>
           <option value="done">Todos (Done)</option>
           <option value="all">Todos (All)</option>
         </select>
         <ul className="todo-app__list-container__list">
-          {todos.map((todo, key) => (
-            <Todo
-              localStorage={localStorage}
-              key={key}
-              todo={todo}
-              todos={todos}
-              setTodos={setTodos}
-              categoryState={categoryState}
-            />
+          {todos.map((todo, index) => (
+            <Todo key={index} todo={todo} categorySelected={categorySelected} />
           ))}
         </ul>
       </article>
     </main>
   );
 };
+
 export default TodoList;

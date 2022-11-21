@@ -1,51 +1,38 @@
 import React, { useEffect, useState } from "react";
 
-const Todo = ({ todo, todos, setTodos, categoryState }) => {
-  let [category, setCategory] = useState([]);
+const Todo = ({ todo, categorySelected }) => {
+  const [category, setCategory] = useState(todo.category);
 
-  useEffect(() => {
-    setCategory("progress");
-  }, []);
-
-  const handleDelete = () => {
-    setTodos(todos.filter((t) => t !== todo));
-
-    const keys = Object.keys(localStorage);
-    for (let key of keys) {
-      const item = localStorage.getItem(key);
-      if (item === todo) {
-        localStorage.removeItem(key);
-      }
+  const handleCheckboxState = (e) => {
+    if (e.target.checked) {
+      setCategory("done");
+      todo.category = "done";
+    } else {
+      setCategory("progress");
+      todo.category = "progress";
     }
-  };
 
-  const handleTodoDone = (e) => {
-    setCategory("done");
+    console.log(todo);
+    localStorage.removeItem(todo.index);
+    localStorage.setItem(todo.index, JSON.stringify(todo));
   };
 
   return (
     <li
-      className={`${
-        categoryState !== "all" && categoryState !== category ? "hide" : ""
-      } todo-app__list-container__list__todo`}
+      style={
+        categorySelected !== category && categorySelected !== "all"
+          ? { display: "none" }
+          : { display: "flex" }
+      }
     >
-      <p>{todo}</p>
-      <span
-        id="todo-check"
-        className={`${
-          categoryState === "done" || category === "done" ? "hide" : ""
-        } material-symbols-outlined`}
-        onClick={handleTodoDone}
-      >
-        check
-      </span>
-      <span
-        onClick={handleDelete}
-        id="todo-delete"
-        className="material-symbols-outlined"
-      >
-        close
-      </span>
+      <input
+        type="checkbox"
+        name="check"
+        id="check"
+        onChange={handleCheckboxState}
+        defaultChecked={category === "done" ? true : false}
+      />
+      <p>{todo.content}</p>
     </li>
   );
 };
