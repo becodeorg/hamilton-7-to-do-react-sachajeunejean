@@ -87,9 +87,7 @@
         }
 
         .crossed-out {
-          &::placeholder {
-            text-decoration: line-through;
-          }
+          text-decoration: line-through;
         }
 
         #check {

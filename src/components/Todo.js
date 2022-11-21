@@ -64,7 +64,7 @@ const Todo = ({ todo, todos, setTodos, categorySelected }) => {
             ? `${todo.index}-content crossed-out`
             : `${todo.index}-content`
         }
-        placeholder={todo.content}
+        defaultValue={todo.content}
         maxLength="20"
         onBlur={updateTextHandler}
       />
