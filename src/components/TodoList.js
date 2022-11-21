@@ -31,7 +31,6 @@ const TodoList = () => {
         index: index,
       };
 
-      console.log(todo);
       setTodos([...todos, todo]);
 
       if (!localStorage.getItem(index)) {
@@ -46,7 +45,6 @@ const TodoList = () => {
   };
 
   const categoryHandler = (e) => {
-    console.log("pass");
     setCategorySelected(e.target.value);
   };
 

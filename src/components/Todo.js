@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Todo = ({ todo, categorySelected }) => {
   const [category, setCategory] = useState(todo.category);
@@ -12,13 +12,27 @@ const Todo = ({ todo, categorySelected }) => {
       todo.category = "progress";
     }
 
-    console.log(todo);
     localStorage.removeItem(todo.index);
     localStorage.setItem(todo.index, JSON.stringify(todo));
   };
 
+  // const textChangeHandler = (e) => {
+  //   console.log(e.target.value);
+  //   e.target.style.width = (e.target.value.length + 1) * 8 + "px";
+  // };
+
+  const updateTextHandler = (e) => {
+    todo.content = e.target.value;
+
+    localStorage.removeItem(todo.index);
+    localStorage.setItem(todo.index, JSON.stringify(todo));
+  };
+
+  const deleteTodo = (e) => {};
+
   return (
     <li
+      className="todo-app__list-container__list__todo"
       style={
         categorySelected !== category && categorySelected !== "all"
           ? { display: "none" }
@@ -32,7 +46,19 @@ const Todo = ({ todo, categorySelected }) => {
         onChange={handleCheckboxState}
         defaultChecked={category === "done" ? true : false}
       />
-      <p>{todo.content}</p>
+      <input
+        type="text"
+        id="txt"
+        className={`${todo.index}-content`}
+        placeholder={todo.content}
+        maxLength="20"
+        // onInput={textChangeHandler}
+        onBlur={updateTextHandler}
+      />
+      <span id="todo-delete" className="material-symbols-outlined">
+        delete
+      </span>
+      {/* {todo.content} */}
     </li>
   );
 };
