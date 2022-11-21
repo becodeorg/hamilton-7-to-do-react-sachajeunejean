@@ -86,6 +86,12 @@
           }
         }
 
+        .crossed-out {
+          &::placeholder {
+            text-decoration: line-through;
+          }
+        }
+
         #check {
           margin-right: 10px;
           width: 20px;
