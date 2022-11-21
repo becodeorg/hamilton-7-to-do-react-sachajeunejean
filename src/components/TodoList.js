@@ -3,7 +3,7 @@ import Todo from "./Todo";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
-  const [categorySelected, setCategorySelected] = useState("progress");
+  const [categorySelected, setCategorySelected] = useState("all");
 
   useEffect(() => {
     const localStorageKeys = Object.keys(localStorage);
@@ -69,13 +69,19 @@ const TodoList = () => {
       </form>
       <article className="todo-app__list-container">
         <select className="categories" onChange={categoryHandler}>
+          <option value="all">Todos (All)</option>
           <option value="progress">Todos (In Progress)</option>
           <option value="done">Todos (Done)</option>
-          <option value="all">Todos (All)</option>
         </select>
         <ul className="todo-app__list-container__list">
           {todos.map((todo, index) => (
-            <Todo key={index} todo={todo} categorySelected={categorySelected} />
+            <Todo
+              key={index}
+              todo={todo}
+              todos={todos}
+              setTodos={setTodos}
+              categorySelected={categorySelected}
+            />
           ))}
         </ul>
       </article>

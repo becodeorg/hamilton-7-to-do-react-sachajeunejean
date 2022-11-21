@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const Todo = ({ todo, categorySelected }) => {
+const Todo = ({ todo, todos, setTodos, categorySelected }) => {
   const [category, setCategory] = useState(todo.category);
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    setIsChecked(category === "done" ? true : false);
+  }, []);
 
   const handleCheckboxState = (e) => {
     if (e.target.checked) {
@@ -26,7 +30,15 @@ const Todo = ({ todo, categorySelected }) => {
     localStorage.setItem(todo.index, JSON.stringify(todo));
   };
 
-  // const deleteTodo = (e) => {};
+  const deleteHandler = (e) => {
+    for (let i = 0; i < todos.length; i++) {
+      if (todo.index === todos[i].index) {
+        todos.splice(i, 1);
+        localStorage.removeItem(todo.index);
+      }
+    }
+    setTodos([...todos]);
+  };
 
   return (
     <li
@@ -56,7 +68,11 @@ const Todo = ({ todo, categorySelected }) => {
         maxLength="20"
         onBlur={updateTextHandler}
       />
-      <span id="todo-delete" className="material-symbols-outlined">
+      <span
+        onClick={deleteHandler}
+        id="todo-delete"
+        className="material-symbols-outlined"
+      >
         delete
       </span>
     </li>
