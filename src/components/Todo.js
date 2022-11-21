@@ -48,7 +48,7 @@ const Todo = ({ todo, categorySelected }) => {
         type="text"
         id="txt"
         className={
-          isChecked == true
+          isChecked === true
             ? `${todo.index}-content crossed-out`
             : `${todo.index}-content`
         }
