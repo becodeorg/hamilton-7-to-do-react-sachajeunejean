@@ -28,7 +28,7 @@ const Todo = ({ todo, categorySelected }) => {
     localStorage.setItem(todo.index, JSON.stringify(todo));
   };
 
-  const deleteTodo = (e) => {};
+  // const deleteTodo = (e) => {};
 
   return (
     <li
