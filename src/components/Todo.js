@@ -30,7 +30,7 @@ const Todo = ({ todo, todos, setTodos, categorySelected }) => {
     localStorage.setItem(todo.index, JSON.stringify(todo));
   };
 
-  const deleteHandler = (e) => {
+  const deleteHandler = () => {
     for (let i = 0; i < todos.length; i++) {
       if (todo.index === todos[i].index) {
         todos.splice(i, 1);
