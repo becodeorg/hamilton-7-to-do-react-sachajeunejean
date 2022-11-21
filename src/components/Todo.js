@@ -6,7 +6,7 @@ const Todo = ({ todo, todos, setTodos, categorySelected }) => {
 
   useEffect(() => {
     setIsChecked(category === "done" ? true : false);
-  }, []);
+  }, [category]);
 
   const handleCheckboxState = (e) => {
     if (e.target.checked) {
