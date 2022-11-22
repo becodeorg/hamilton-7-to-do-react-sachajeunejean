@@ -23,13 +23,6 @@ const Todo = ({ todo, todos, setTodos, categorySelected }) => {
     localStorage.setItem(todo.index, JSON.stringify(todo));
   };
 
-  const updateTextHandler = (e) => {
-    todo.content = e.target.value;
-
-    localStorage.removeItem(todo.index);
-    localStorage.setItem(todo.index, JSON.stringify(todo));
-  };
-
   const deleteHandler = () => {
     if (window.confirm("Do you really want to delete this todo ?")) {
       for (let i = 0; i < todos.length; i++) {
