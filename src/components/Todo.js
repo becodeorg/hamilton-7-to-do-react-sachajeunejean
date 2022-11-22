@@ -31,13 +31,15 @@ const Todo = ({ todo, todos, setTodos, categorySelected }) => {
   };
 
   const deleteHandler = () => {
-    for (let i = 0; i < todos.length; i++) {
-      if (todo.index === todos[i].index) {
-        todos.splice(i, 1);
-        localStorage.removeItem(todo.index);
+    if (window.confirm("Do you really want to delete this todo ?")) {
+      for (let i = 0; i < todos.length; i++) {
+        if (todo.index === todos[i].index) {
+          todos.splice(i, 1);
+          localStorage.removeItem(todo.index);
+        }
       }
+      setTodos([...todos]);
     }
-    setTodos([...todos]);
   };
 
   return (
@@ -56,7 +58,7 @@ const Todo = ({ todo, todos, setTodos, categorySelected }) => {
         onChange={handleCheckboxState}
         defaultChecked={category === "done" ? true : false}
       />
-      <input
+      {/* <input
         type="text"
         id="txt"
         className={
@@ -67,7 +69,20 @@ const Todo = ({ todo, todos, setTodos, categorySelected }) => {
         defaultValue={todo.content}
         maxLength="20"
         onBlur={updateTextHandler}
-      />
+      /> */}
+
+      <p
+        id="txt"
+        className={
+          isChecked === true
+            ? `${todo.index}-content crossed-out`
+            : `${todo.index}-content`
+        }
+      >
+        {todo.content}
+      </p>
+
+      {/* <span className="settings material-symbols-outlined">settings</span> */}
       <span
         onClick={deleteHandler}
         id="todo-delete"

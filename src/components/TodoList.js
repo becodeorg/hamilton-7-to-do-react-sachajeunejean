@@ -41,6 +41,8 @@ const TodoList = () => {
         };
         localStorage.setItem(index, JSON.stringify(item));
       }
+
+      e.target[0].value = "";
     }
   };
 

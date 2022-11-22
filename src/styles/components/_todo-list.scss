@@ -69,7 +69,7 @@
       &__todo {
         display: flex;
         flex-direction: row;
-        align-items: left;
+        align-items: center;
         margin-bottom: 20px;
         font-size: 16px;
         width: 100%;
@@ -80,6 +80,7 @@
           font-family: "Sono", sans-serif;
           font-size: 16px;
           color: black;
+          margin-right: 10px;
 
           &::placeholder {
             color: black;
@@ -100,6 +101,11 @@
         #todo-delete {
           cursor: pointer;
           color: red;
+        }
+
+        .settings {
+          color: rgb(34, 34, 34);
+          cursor: pointer;
         }
       }
     }
